@@ -1,5 +1,5 @@
 const BASE_URL = 'https://interview.fio.de/core-frontend/api';
-// const AUTH_TOKEN = 'dcSPTXR7IQYtn2oMCfIAxvwNpOzGyU';
+const AUTH_TOKEN = 'dcSPTXR7IQYtn2oMCfIAxvwNpOzGyU'
 
 export const getAllAirports = async () => {
     const response = await fetch(`${BASE_URL}/airports`);
@@ -9,31 +9,28 @@ export const getAllAirports = async () => {
 };
 
 export const getAllBookings = async () => {
-    const response = await fetch();
+    const response = await fetch(`${BASE_URL}/bookings?pageIndex=1&authToken=${AUTH_TOKEN}`);
     const result = await response.json();
 
     return result;
 }
 
 export const createBooking = async (bookingData) => {
-    const response = await fetch(`https://interview.fio.de/core-frontend/api/bookings/create?authToken=dcSPTXR7IQYtn2oMCfIAxvwNpOzGyU`, {
+    const response = await fetch(`${BASE_URL}/bookings/create?authToken=${AUTH_TOKEN}`, {
         method: 'POST',
         headers: {
             'content-type': 'application/json',
-            // 'X-Authorization': AUTH_TOKEN,
         },
-        body: JSON.stringify(bookingData),     
+        body: JSON.stringify(bookingData),
     });
-
-    // if (response.status === 401) {
-    //     return {};
-    // };
 
     const result = await response.json();
 
-    // if (!response.ok) {
-    //     throw result;
-    // };
-
     return result;
+};
+
+export const deleteBooking = async (bookingId) => {
+    const response = await fetch(`${BASE_URL}/bookings/delete/${bookingId}?authToken=${AUTH_TOKEN}`, {
+        method: 'DELETE',
+    });
 };

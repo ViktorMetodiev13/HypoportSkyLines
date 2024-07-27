@@ -2,10 +2,12 @@ import "./bookings.css";
 
 import { useEffect, useState } from "react";
 
-import { createBooking, getAllAirports } from "../../services/bookingService";
+import { BookingsItem } from "./BookingsItem/BookingsItem"
+import { createBooking, getAllAirports, getAllBookings, deleteBooking } from "../../services/bookingService";
 
 export const Bookings = () => {
     const [airports, setAirports] = useState([]);
+    const [bookings, setBookings] = useState({ list: [], count: 0 });
     const [bookingValues, setBookingValues] = useState({
         'guest': '',
         'departureAirport': '',
@@ -21,11 +23,18 @@ export const Bookings = () => {
             });
     }, []);
 
+    useEffect(() => {
+        getAllBookings()
+            .then(result => {
+                setBookings(result);
+            });
+    }, []);
+
     const changeHandler = (e) => {
         setBookingValues(state => ({ ...state, [e.target.name]: e.target.value }));
     };
 
-    const onCreateBookingSubmit = (e) => {
+    const onCreateBookingSubmit = async (e) => {
         e.preventDefault();
 
         const [firstName, lastName] = bookingValues.guest.split(" ");
@@ -42,9 +51,27 @@ export const Bookings = () => {
             returnDate: bookingValues.dateOfReturn,
         };
 
-        console.log(bookingModel);
+        try {
+            const newBooking = await createBooking(bookingModel);
 
-        createBooking(bookingModel);
+            createBooking(bookingModel).then(newBooking => {
+                setBookings(prevState => ({
+                    list: [...prevState.list, newBooking],
+                    count: prevState.count + 1
+                }));
+            });
+        } catch (error) {
+            console.log('An error occured while trying to add the new booking!');
+        };
+    };
+
+    const handleDelete = (id) => {
+        deleteBooking(id).then(() => {
+            setBookings(prevState => ({
+                list: prevState.list.filter(booking => booking.id !== id),
+                count: prevState.count - 1
+            }));
+        });
     };
 
     return (
@@ -139,30 +166,7 @@ export const Bookings = () => {
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>Viktor Metodiev</td>
-                        <td>Sofia, Bulgaria</td>
-                        <td>Tokyo, Japan</td>
-                        <td>28/07/2024</td>
-                        <td>28/07/2024</td>
-                        <td><button className="bookings-list-del-btn"><i class="fa-solid fa-trash-can"></i></button></td>
-                    </tr>
-                    <tr>
-                        <td>Viktor Metodiev</td>
-                        <td>Sofia, Bulgaria</td>
-                        <td>Tokyo, Japan</td>
-                        <td>28/07/2024</td>
-                        <td>28/07/2024</td>
-                        <td><button className="bookings-list-del-btn"><i class="fa-solid fa-trash-can"></i></button></td>
-                    </tr>
-                    <tr>
-                        <td>Viktor Metodiev</td>
-                        <td>Sofia, Bulgaria</td>
-                        <td>Tokyo, Japan</td>
-                        <td>28/07/2024</td>
-                        <td>28/07/2024</td>
-                        <td><button className="bookings-list-del-btn"><i class="fa-solid fa-trash-can"></i></button></td>
-                    </tr>
+                    {bookings?.list?.map(booking => <BookingsItem key={booking.id} {...booking} onDelete={handleDelete} />)}
                 </tbody>
             </table>
         </div>
