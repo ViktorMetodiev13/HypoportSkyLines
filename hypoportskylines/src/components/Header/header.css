@@ -1,0 +1,21 @@
+.header {
+    background-color: #fff;
+    padding: 12px;
+}
+
+.header-logo-title {
+    display: flex;
+    align-items: center;
+    max-width: 60%;
+    margin: auto;
+    cursor: pointer;
+}
+
+.header-img {
+    width: 112px;
+    height: 72px;
+}
+
+.header-title {
+    letter-spacing: 0.3px;
+}
