@@ -1,6 +1,19 @@
 import "./bookings.css";
 
+import { useEffect, useState } from "react";
+
+import { getAllAirports } from "../../services/bookingService";
+
 export const Bookings = () => {
+    const [airports, setAirports] = useState([]);
+
+    useEffect(() => {
+        getAllAirports()
+            .then(result => {
+                setAirports(result)
+            })
+    }, []);
+
     return (
         <div className="bookings">
             <form className="flight-form">
@@ -14,11 +27,7 @@ export const Bookings = () => {
                         <div>
                             <select name="from" id="from" className="flight-depature-airport">
                                 <option value="">Please Select an airport</option>
-                                <option value="">Sofia Airport</option>
-                                <option value="">Amsterdam Airport Schiphol</option>
-                                <option value="">Tokyo Haneda Airport</option>
-                                <option value="">London Heathrow</option>
-                                <option value="">Guangzhou Baiyun Airport</option>
+                                {airports.map(airport => <option value="" key={airport.id}>{airport.title}</option>)}
                             </select>
                         </div>
                     </div>
@@ -27,11 +36,7 @@ export const Bookings = () => {
                         <div>
                             <select name="from" id="from" className="flight-destination-airport">
                                 <option value="">Please Select an airport</option>
-                                <option value="">Sofia Airport</option>
-                                <option value="">Amsterdam Airport Schiphol</option>
-                                <option value="">Tokyo Haneda Airport</option>
-                                <option value="">London Heathrow</option>
-                                <option value="">Guangzhou Baiyun Airport</option>
+                                {airports.map(airport => <option value="" key={airport.id}>{airport.title}</option>)}
                             </select>
                         </div>
                     </div>
