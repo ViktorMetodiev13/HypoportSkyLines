@@ -68,7 +68,7 @@ export const Bookings = () => {
                         <td>Tokyo, Japan</td>
                         <td>28/07/2024</td>
                         <td>28/07/2024</td>
-                        <td><button><i class="fa-solid fa-trash-can"></i></button></td>
+                        <td><button className="bookings-list-del-btn"><i class="fa-solid fa-trash-can"></i></button></td>
                     </tr>
                     <tr>
                         <td>Viktor Metodiev</td>
@@ -76,7 +76,7 @@ export const Bookings = () => {
                         <td>Tokyo, Japan</td>
                         <td>28/07/2024</td>
                         <td>28/07/2024</td>
-                        <td><button><i class="fa-solid fa-trash-can"></i></button></td>
+                        <td><button className="bookings-list-del-btn"><i class="fa-solid fa-trash-can"></i></button></td>
                     </tr>
                     <tr>
                         <td>Viktor Metodiev</td>
@@ -84,7 +84,7 @@ export const Bookings = () => {
                         <td>Tokyo, Japan</td>
                         <td>28/07/2024</td>
                         <td>28/07/2024</td>
-                        <td><button><i class="fa-solid fa-trash-can"></i></button></td>
+                        <td><button className="bookings-list-del-btn"><i class="fa-solid fa-trash-can"></i></button></td>
                     </tr>
                 </tbody>
             </table>
