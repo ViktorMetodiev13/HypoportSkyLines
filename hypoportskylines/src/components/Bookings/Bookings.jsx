@@ -13,7 +13,7 @@ export const Bookings = () => {
                         <p>Departure Airport</p>
                         <div>
                             <select name="from" id="from" className="flight-depature-airport">
-                                <option value="">Please Select</option>
+                                <option value="">Please Select an airport</option>
                                 <option value="">Sofia Airport</option>
                                 <option value="">Amsterdam Airport Schiphol</option>
                                 <option value="">Tokyo Haneda Airport</option>
@@ -26,7 +26,7 @@ export const Bookings = () => {
                         <p>Destination Airport</p>
                         <div>
                             <select name="from" id="from" className="flight-destination-airport">
-                                <option value="">Please Select</option>
+                                <option value="">Please Select an airport</option>
                                 <option value="">Sofia Airport</option>
                                 <option value="">Amsterdam Airport Schiphol</option>
                                 <option value="">Tokyo Haneda Airport</option>
@@ -50,8 +50,44 @@ export const Bookings = () => {
                 <button className="book-flight-form-btn">Book</button>
             </form>
 
-            {/* 2. create the table with all bookings */}
-            <div className="bookings-table">Table</div>
+            <table className="bookings-list">
+                <thead>
+                    <tr>
+                        <th>Guest</th>
+                        <th>Depature Airport</th>
+                        <th>Destination Airport</th>
+                        <th>Depature Date</th>
+                        <th>Date of Return</th>
+                        <th>Options</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Viktor Metodiev</td>
+                        <td>Sofia, Bulgaria</td>
+                        <td>Tokyo, Japan</td>
+                        <td>28/07/2024</td>
+                        <td>28/07/2024</td>
+                        <td><button><i class="fa-solid fa-trash-can"></i></button></td>
+                    </tr>
+                    <tr>
+                        <td>Viktor Metodiev</td>
+                        <td>Sofia, Bulgaria</td>
+                        <td>Tokyo, Japan</td>
+                        <td>28/07/2024</td>
+                        <td>28/07/2024</td>
+                        <td><button><i class="fa-solid fa-trash-can"></i></button></td>
+                    </tr>
+                    <tr>
+                        <td>Viktor Metodiev</td>
+                        <td>Sofia, Bulgaria</td>
+                        <td>Tokyo, Japan</td>
+                        <td>28/07/2024</td>
+                        <td>28/07/2024</td>
+                        <td><button><i class="fa-solid fa-trash-can"></i></button></td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
     )
 }
