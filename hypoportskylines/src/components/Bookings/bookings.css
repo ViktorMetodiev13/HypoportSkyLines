@@ -1,0 +1,66 @@
+.bookings {
+    max-width: 60%;
+    margin: auto;
+    margin-top: 10%;
+}
+
+.flight-form {
+    display: flex;
+}
+
+.flight-form-entries {
+    display: flex;
+}
+
+.flight-form-entry {
+    padding: 14px 20px;
+    border-right: 1px solid #A9A9A9;
+    background-color: #fff;
+}
+
+.flight-form-entry:first-child {
+    border-top-left-radius: 8px;
+    border-bottom-left-radius: 8px;
+}
+
+.flight-form-entry:last-child {
+    border-right: none;
+}
+
+.flight-guest,
+.flight-depature-airport,
+.flight-destination-airport,
+.flight-departure-date,
+.flight-date-of-return {
+    outline: none;
+    padding: 10px;
+    border-radius: 10px;
+    border: none;
+    background-color: rgb(237, 234, 222);
+    color: #2F4F4F;
+}
+
+.flight-form-entry>p {
+    margin-top: 0px;
+    color: 	#2F4F4F;
+}
+
+.book-flight-form-btn {
+    padding: 14px 28px;
+    border: none;
+    background-color: #6264ef;
+    color: #fff;
+    border-radius: 8px;
+    border-top-left-radius: 0px;
+    border-bottom-left-radius: 0px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    transition: background-color 0.3s;
+}
+
+.book-flight-form-btn:hover {
+    background-color: #5053d6;
+}
+

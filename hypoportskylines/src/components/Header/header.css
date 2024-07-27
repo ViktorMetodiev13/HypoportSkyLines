@@ -1,9 +1,9 @@
 .header {
     background-color: #fff;
-    padding: 12px;
+    padding: 12px 0px;
 }
 
-.header-logo-title {
+.header-logo-title-section {
     display: flex;
     align-items: center;
     max-width: 60%;
@@ -11,7 +11,7 @@
     cursor: pointer;
 }
 
-.header-img {
+.header-logo {
     width: 112px;
     height: 72px;
 }
