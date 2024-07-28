@@ -1,5 +1,7 @@
 import "./bookingsItem.css";
 
+import { formatDateForDisplay } from "../../../utils/formatDate";
+
 export const BookingsItem = ({
     firstName,
     lastName,
@@ -8,16 +10,19 @@ export const BookingsItem = ({
     departureDate,
     returnDate,
     id,
-    onDelete
+    onDelete,
+    airports
 }) => {
+    const departureAirport = airports.find(airport => airport.id === departureAirportId);
+    const arrivalAirport = airports.find(airport => airport.id === arrivalAirportId);
 
     return (
         <tr>
             <td>{firstName} {lastName}</td>
-            <td>{departureAirportId}</td>
-            <td>{arrivalAirportId}</td>
-            <td>{departureDate}</td>
-            <td>{returnDate}</td>
+            <td>{departureAirport?.title}</td>
+            <td>{arrivalAirport?.title}</td>
+            <td>{formatDateForDisplay(departureDate)}</td>
+            <td>{formatDateForDisplay(returnDate)}</td>
             <td>
                 <button
                     className="bookings-list-del-btn"

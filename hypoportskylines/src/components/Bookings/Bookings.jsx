@@ -52,8 +52,6 @@ export const Bookings = () => {
         };
 
         try {
-            const newBooking = await createBooking(bookingModel);
-
             createBooking(bookingModel).then(newBooking => {
                 setBookings(prevState => ({
                     list: [...prevState.list, newBooking],
@@ -63,6 +61,14 @@ export const Bookings = () => {
         } catch (error) {
             console.log('An error occured while trying to add the new booking!');
         };
+
+        setBookingValues({
+            'guest': '',
+            'departureAirport': '',
+            'destinationAirport': '',
+            'departureDate': '',
+            'dateOfReturn': '',
+        });
     };
 
     const handleDelete = (id) => {
@@ -166,7 +172,14 @@ export const Bookings = () => {
                     </tr>
                 </thead>
                 <tbody>
-                    {bookings?.list?.map(booking => <BookingsItem key={booking.id} {...booking} onDelete={handleDelete} />)}
+                    {bookings?.list?.map(booking =>
+                        <BookingsItem
+                            key={booking.id}
+                            {...booking}
+                            onDelete={handleDelete}
+                            airports={airports}
+                        />
+                    )}
                 </tbody>
             </table>
         </div>
