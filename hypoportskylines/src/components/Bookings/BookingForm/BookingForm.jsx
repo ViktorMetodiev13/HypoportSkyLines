@@ -43,16 +43,16 @@ export const BookingForm = ({ onSubmit }) => {
             errors.departureAirport = 'Please select an airport';
             valid = false;
         }
-
-        if (!bookingValues.destinationAirport) {
-            errors.destinationAirport = 'Please select an airport';
-            valid = false;
-        }
         
         if (bookingValues.departureAirport === bookingValues.destinationAirport) {
             errors.destinationAirport = 'Departure Airport and Destination Airport should be different';
             valid = false;
         };
+
+        if (!bookingValues.destinationAirport) {
+            errors.destinationAirport = 'Please select an airport';
+            valid = false;
+        }
 
         // Validate dates
         const today = new Date().toISOString().split("T")[0];
