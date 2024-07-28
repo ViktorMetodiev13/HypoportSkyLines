@@ -1,6 +1,9 @@
 import { useState } from "react";
 
-export const BookingForm = ({ onCreateBookingSubmit, airports }) => {
+import { useAirports } from "../../../hooks/useAirports";
+
+export const BookingForm = ({ onSubmit }) => {
+    const airports = useAirports();
     const [bookingValues, setBookingValues] = useState({
         guest: '',
         departureAirport: '',
@@ -13,16 +16,34 @@ export const BookingForm = ({ onCreateBookingSubmit, airports }) => {
         setBookingValues(state => ({ ...state, [e.target.name]: e.target.value }));
     };
 
-    const submitHandler = (e) => {
+    const submitHandler = async (e) => {
         e.preventDefault();
-        onCreateBookingSubmit(bookingValues);
-        setBookingValues({
-            guest: '',
-            departureAirport: '',
-            destinationAirport: '',
-            departureDate: '',
-            dateOfReturn: '',
-        });
+        try {
+            const [firstName, lastName] = bookingValues.guest.split(" ");
+            const departureAirport = airports.find(airport => airport.title === bookingValues.departureAirport);
+            const destinationAirport = airports.find(airport => airport.title === bookingValues.destinationAirport);
+
+            const bookingModel = {
+                firstName: firstName || "",
+                lastName: lastName || "",
+                departureAirportId: departureAirport ? departureAirport.id : null,
+                arrivalAirportId: destinationAirport ? destinationAirport.id : null,
+                departureDate: bookingValues.departureDate,
+                returnDate: bookingValues.dateOfReturn,
+            };
+
+            onSubmit(bookingModel);
+
+            setBookingValues({
+                guest: '',
+                departureAirport: '',
+                destinationAirport: '',
+                departureDate: '',
+                dateOfReturn: '',
+            });
+        } catch (error) {
+            console.error('Error submitting booking form:', error);
+        }
     };
 
     return (
