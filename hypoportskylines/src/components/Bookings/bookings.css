@@ -9,3 +9,9 @@
     align-items: center;
     gap: 90px;
 }
+
+.Loading-text {
+    color: #fff;
+    margin-top: -90px;
+    font-size: 48px;
+}

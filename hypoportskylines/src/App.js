@@ -6,6 +6,7 @@ import { Bookings } from './components/Bookings/Bookings';
 function App() {
     return (
         <div className="App">
+            {/* <img src='.././public/images/bg6.jpg'/> */}
             <Header />
             <Bookings />
         </div>

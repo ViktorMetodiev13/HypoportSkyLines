@@ -1,23 +1,42 @@
-import { useEffect, useState } from "react";
+import { useState, useEffect } from "react";
 import { getAllBookings, createBooking, deleteBooking } from "../services/bookingService";
 
 export const useBookings = () => {
-    const [bookings, setBookings] = useState({ 
-        list: [], 
+    const [bookings, setBookings] = useState({
+        list: [],
         count: 0
     });
+    const [page, setPage] = useState(0);
+    const [loading, setLoading] = useState(false);
 
     useEffect(() => {
         const fetchBookings = async () => {
             try {
-                const result = await getAllBookings();
-                setBookings(result);
+                setLoading(true);
+                const result = await getAllBookings(page);
+                setBookings(prev => ({
+                    list: page === 0 ? result.list : [...prev.list, ...result.list],
+                    count: result.count
+                }));
             } catch (error) {
                 console.error('Error fetching bookings:', error);
+            } finally {
+                setLoading(false);
             }
         };
 
         fetchBookings();
+    }, [page]);
+
+    const handleScroll = () => {
+        if (window.innerHeight + document.documentElement.scrollTop + 1 >= document.documentElement.scrollHeight) {
+            setPage(prev => prev + 1);
+        }
+    };
+
+    useEffect(() => {
+        window.addEventListener("scroll", handleScroll);
+        return () => window.removeEventListener("scroll", handleScroll);
     }, []);
 
     const addBooking = async (bookingModel) => {
@@ -44,5 +63,5 @@ export const useBookings = () => {
         }
     };
 
-    return { bookings, addBooking, removeBooking };
+    return { bookings, addBooking, removeBooking, loading };
 };

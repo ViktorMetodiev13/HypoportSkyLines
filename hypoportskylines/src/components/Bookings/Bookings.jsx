@@ -1,5 +1,4 @@
 import "./bookings.css";
-
 import { BookingForm } from "./BookingForm/BookingForm";
 import { BookingsTable } from "./BookingsTable/BookingsTable";
 import { useBookings } from "../../hooks/useBookings";
@@ -7,7 +6,7 @@ import { useAirports } from "../../hooks/useAirports";
 
 export const Bookings = () => {
     const airports = useAirports();
-    const { bookings, addBooking, removeBooking } = useBookings();
+    const { bookings, addBooking, removeBooking, loading } = useBookings();
 
     const handleBookingSubmit = async (bookingModel) => {
         try {
@@ -20,7 +19,12 @@ export const Bookings = () => {
     return (
         <div className="bookings">
             <BookingForm onSubmit={handleBookingSubmit} />
-            <BookingsTable bookings={bookings.list} airports={airports} onDelete={removeBooking} />
+            <BookingsTable
+                bookings={bookings.list}
+                airports={airports}
+                onDelete={removeBooking}
+            />
+            {loading && <div className="loading-text">Loading more bookings...</div>}
         </div>
     );
 };

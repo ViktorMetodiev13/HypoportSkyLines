@@ -5,5 +5,9 @@ export const getAllAirports = async () => {
     const response = await fetch(`${BASE_URL}/airports?authToken=${AUTH_TOKEN}`);
     const result = await response.json();
 
+    if (!response.ok) {
+        throw new Error('Failed to fetch airports');
+    };
+
     return result;
 };
