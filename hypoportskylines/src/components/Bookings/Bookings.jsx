@@ -7,7 +7,7 @@ import { useAirports } from "../../hooks/useAirports";
 
 export const Bookings = () => {
     const airports = useAirports();
-    const { bookings, addBooking, removeBooking, loading } = useBookings();
+    const { bookings, addBooking, removeBooking } = useBookings();
 
     const handleBookingSubmit = async (bookingModel) => {
         try {
@@ -25,7 +25,6 @@ export const Bookings = () => {
                 airports={airports}
                 onDelete={removeBooking}
             />
-            {loading && <div className="loading-text">Loading more bookings...</div>}
         </div>
     );
 };

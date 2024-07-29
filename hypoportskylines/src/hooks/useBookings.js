@@ -7,12 +7,10 @@ export const useBookings = () => {
         count: 0
     });
     const [page, setPage] = useState(0);
-    const [loading, setLoading] = useState(false);
 
     useEffect(() => {
         const fetchBookings = async () => {
             try {
-                setLoading(true);
                 const result = await getAllBookings(page);
                 setBookings(prev => ({
                     list: page === 0 ? result.list : [...prev.list, ...result.list],
@@ -20,9 +18,7 @@ export const useBookings = () => {
                 }));
             } catch (error) {
                 console.error('Error fetching bookings:', error);
-            } finally {
-                setLoading(false);
-            }
+            };
         };
 
         fetchBookings();
@@ -63,5 +59,5 @@ export const useBookings = () => {
         }
     };
 
-    return { bookings, addBooking, removeBooking, loading };
+    return { bookings, addBooking, removeBooking };
 };
