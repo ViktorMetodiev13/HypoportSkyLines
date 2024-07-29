@@ -1,4 +1,5 @@
 import "./bookings.css";
+
 import { BookingForm } from "./BookingForm/BookingForm";
 import { BookingsTable } from "./BookingsTable/BookingsTable";
 import { useBookings } from "../../hooks/useBookings";

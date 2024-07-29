@@ -2,7 +2,7 @@ const BASE_URL = 'https://interview.fio.de/core-frontend/api';
 const AUTH_TOKEN = 'dcSPTXR7IQYtn2oMCfIAxvwNpOzGyU';
 
 export const getAllBookings = async (pageIndex) => {
-    const response = await fetch(`${BASE_URL}/bookings?pageIndex=${pageIndex}&pageSize=8&authToken=${AUTH_TOKEN}`);
+    const response = await fetch(`${BASE_URL}/bookings?pageIndex=${pageIndex}&pageSize=10&authToken=${AUTH_TOKEN}`);
     const result = await response.json();
 
     if (!Array.isArray(result.list)) {
