@@ -4,7 +4,12 @@ import { useState } from "react";
 
 import { useAirports } from "../../../hooks/useAirports";
 
-export const BookingForm = ({ onSubmit }) => {
+// TODO: Fix BookingForm props object
+type BookingFormProps = {
+    onSubmit: () => void;
+}
+
+export const BookingForm : React.FC = ({ onSubmit }: BookingFormProps) => {
     const airports = useAirports();
     const [bookingValues, setBookingValues] = useState({
         guest: '',
@@ -73,6 +78,7 @@ export const BookingForm = ({ onSubmit }) => {
             valid = false;
         }
 
+        // Set Errors
         setErrors(errors);
         return valid;
     };

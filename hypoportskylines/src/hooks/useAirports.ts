@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+
 import { getAllAirports } from "../services/ariportService";
 
 export const useAirports = () => {
@@ -11,7 +12,7 @@ export const useAirports = () => {
                 setAirports(result);
             } catch (error) {
                 console.error('Error fetching airports:', error);
-            }
+            };
         };
 
         fetchAirports();

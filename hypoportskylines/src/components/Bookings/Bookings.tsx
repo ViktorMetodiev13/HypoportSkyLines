@@ -1,20 +1,31 @@
 import "./bookings.css";
 
+import React from "react";
+
 import { BookingForm } from "./BookingForm/BookingForm";
 import { BookingsTable } from "./BookingsTable/BookingsTable";
 import { useBookings } from "../../hooks/useBookings";
 import { useAirports } from "../../hooks/useAirports";
 
-export const Bookings = () => {
+type BookingModel = {
+    firstName: string;
+    lastName: string;
+    departureAirportId: number;
+    arrivalAirportId: number;
+    departureDate: string;
+    returnDate: string;
+};
+
+export const Bookings : React.FC = () => {
     const airports = useAirports();
     const { bookings, addBooking, removeBooking } = useBookings();
 
-    const handleBookingSubmit = async (bookingModel) => {
+    const handleBookingSubmit = async (bookingModel: BookingModel) => {
         try {
             await addBooking(bookingModel);
         } catch (error) {
             console.error('Error handling booking submit:', error);
-        }
+        };
     };
 
     return (
