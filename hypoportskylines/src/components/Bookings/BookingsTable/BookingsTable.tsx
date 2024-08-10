@@ -2,8 +2,35 @@ import "./bookingsTable.css";
 
 import { formatDateForDisplay } from "../../../utils/formatDate";
 
-export const BookingsTable = ({ bookings, onDelete, airports }) => {
-    const getAirportTitle = (airportId) => {
+type Airports = {
+    id: number,
+    code: string,
+    title: string,
+}
+
+type BookingsItem = {
+    id: number;
+    firstName: string;
+    lastName: string;
+    departureAirportId: number;
+    arrivalAirportId: number;
+    departureDate: string;
+    returnDate: string;
+}
+
+type BookingsList = {
+    list: BookingsItem[];
+    totalCount: string;
+}
+
+type BookingTableProps = {
+    onDelete: (id: number) => void;
+    airports: Airports[];
+    bookings: BookingsList['list'];
+}
+
+export const BookingsTable = ({ bookings, onDelete, airports }: BookingTableProps) => {
+    const getAirportTitle = (airportId: number) => {
         const airport = airports.find(airport => airport.id === airportId);
         return airport ? airport.title : "Unknown Airport";
     };

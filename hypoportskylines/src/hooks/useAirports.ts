@@ -2,8 +2,18 @@ import { useEffect, useState } from "react";
 
 import { getAllAirports } from "../services/ariportService";
 
+type AirportItem = {
+    id: number,
+    code: string,
+    title: string,
+}
+
+type AirportsList = {
+    setAirports: React.Dispatch<React.SetStateAction<AirportItem[]>>;
+}
+
 export const useAirports = () => {
-    const [airports, setAirports] = useState([]);
+    const [airports, setAirports] = useState<AirportsList | []>([]);
 
     useEffect(() => {
         const fetchAirports = async () => {

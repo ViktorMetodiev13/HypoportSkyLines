@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import { getAllBookings, createBooking, deleteBooking } from "../services/bookingService";
 
 type BookingModel = {
-    id?: number;
+    id: number;
     firstName: string;
     lastName: string;
     departureAirportId: number;
@@ -12,8 +12,15 @@ type BookingModel = {
     returnDate: string;
 };
 
+type BookingsList = {
+    setBookings: React.Dispatch<React.SetStateAction<{
+        list: BookingModel[];
+        count: number;
+    }>>
+}
+
 export const useBookings = () => {
-    const [bookings, setBookings] = useState({
+    const [bookings, setBookings] = useState<BookingsList | {list: [], count: 0}>({
         list: [],
         count: 0
     });
