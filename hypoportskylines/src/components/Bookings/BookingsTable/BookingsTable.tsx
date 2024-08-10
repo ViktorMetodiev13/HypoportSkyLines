@@ -1,35 +1,15 @@
 import "./bookingsTable.css";
 
 import { formatDateForDisplay } from "../../../utils/formatDate";
-
-type Airports = {
-    id: number,
-    code: string,
-    title: string,
-}
-
-type BookingsItem = {
-    id: number;
-    firstName: string;
-    lastName: string;
-    departureAirportId: number;
-    arrivalAirportId: number;
-    departureDate: string;
-    returnDate: string;
-}
-
-type BookingsList = {
-    list: BookingsItem[];
-    totalCount: string;
-}
+import { BookingsResponse, AirportsList } from "../../../utils/types";
 
 type BookingTableProps = {
     onDelete: (id: number) => void;
-    airports: Airports[];
-    bookings: BookingsList['list'];
+    airports: AirportsList[];
+    bookings: BookingsResponse['list'];
 }
 
-export const BookingsTable = ({ bookings, onDelete, airports }: BookingTableProps) => {
+export const BookingsTable: React.FC<BookingTableProps> = ({ bookings, onDelete, airports }) => {
     const getAirportTitle = (airportId: number) => {
         const airport = airports.find(airport => airport.id === airportId);
         return airport ? airport.title : "Unknown Airport";

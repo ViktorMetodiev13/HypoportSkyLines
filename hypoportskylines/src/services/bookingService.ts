@@ -1,28 +1,21 @@
+import { BookingsResponse, BookingData } from '../utils/types';
+
 const BASE_URL = 'https://interview.fio.de/core-frontend/api';
 const AUTH_TOKEN = 'dcSPTXR7IQYtn2oMCfIAxvwNpOzGyU';
 
-export const getAllBookings = async (pageIndex: number) => {
+export const getAllBookings = async (pageIndex: number): Promise<BookingsResponse> => {
     const response = await fetch(`${BASE_URL}/bookings?pageIndex=${pageIndex}&pageSize=8&authToken=${AUTH_TOKEN}`);
-    const result = await response.json();
+    const result: BookingsResponse = await response.json();
 
     if (!Array.isArray(result.list)) {
         throw new Error("API response format unexpected");
-    };
+    }
 
     if (!response.ok) {
         throw new Error('Failed to fetch bookings');
-    };
+    }
 
     return result;
-};
-
-type BookingData = {
-    firstName: string;
-    lastName: string;
-    departureAirportId: number;
-    arrivalAirportId: number;
-    departureDate: string;
-    returnDate: string;
 };
 
 export const createBooking = async (bookingData: BookingData) => {
