@@ -1,0 +1,9 @@
+body {
+    background-image: url(../public/images/bg6.jpg);
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    height: 90vh;
+    width: 100vw;
+    background-repeat: no-repeat;
+}
