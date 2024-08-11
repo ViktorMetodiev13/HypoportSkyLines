@@ -5,7 +5,7 @@ import { BookingsResponse, AirportsList } from "../../../utils/types";
 
 type BookingTableProps = {
     onDelete: (id: number) => void;
-    airports: AirportsList[];
+    airports: AirportsList;
     bookings: BookingsResponse['list'];
 }
 

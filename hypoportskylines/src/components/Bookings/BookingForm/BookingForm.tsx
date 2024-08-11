@@ -1,17 +1,18 @@
 import "./bookingForm.css";
 
-import { useState } from "react";
+import React, { useState } from "react";
 
 import { useAirports } from "../../../hooks/useAirports";
 
-// TODO: Fix BookingForm props object
+import { BookingModel, BookingFormValues } from "../../../utils/types";
+
 type BookingFormProps = {
-    onSubmit: () => void;
+    onSubmit: (BookingModel: BookingModel) => void;
 }
 
-export const BookingForm : React.FC = ({ onSubmit }: BookingFormProps) => {
+export const BookingForm = ({ onSubmit }: BookingFormProps) => {
     const airports = useAirports();
-    const [bookingValues, setBookingValues] = useState({
+    const [bookingValues, setBookingValues] = useState<BookingFormValues>({
         guest: '',
         departureAirport: '',
         destinationAirport: '',
@@ -19,17 +20,11 @@ export const BookingForm : React.FC = ({ onSubmit }: BookingFormProps) => {
         dateOfReturn: '',
     });
 
-    const [errors, setErrors] = useState({
-        guest: '',
-        departureAirport: '',
-        destinationAirport: '',
-        departureDate: '',
-        dateOfReturn: '',
-    });
+    const [errors, setErrors] = useState<Partial<BookingFormValues>>({});
 
     const validate = () => {
         let valid = true;
-        let errors = {};
+        let errors: Partial<BookingFormValues> = {};
 
         // Validate guest
         if (!bookingValues.guest) {
@@ -83,11 +78,11 @@ export const BookingForm : React.FC = ({ onSubmit }: BookingFormProps) => {
         return valid;
     };
 
-    const changeHandler = (e) => {
+    const changeHandler = (e: React.ChangeEvent<HTMLSelectElement | HTMLInputElement>) => {
         setBookingValues(state => ({ ...state, [e.target.name]: e.target.value }));
     };
 
-    const submitHandler = async (e) => {
+    const submitHandler = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
 
         if (validate()) {
@@ -96,11 +91,11 @@ export const BookingForm : React.FC = ({ onSubmit }: BookingFormProps) => {
                 const departureAirport = airports.find(airport => airport.title === bookingValues.departureAirport);
                 const destinationAirport = airports.find(airport => airport.title === bookingValues.destinationAirport);
 
-                const bookingModel = {
+                const bookingModel: BookingModel = {
                     firstName: firstName || "",
                     lastName: lastName || "",
-                    departureAirportId: departureAirport ? departureAirport.id : null,
-                    arrivalAirportId: destinationAirport ? destinationAirport.id : null,
+                    departureAirportId: departureAirport ? departureAirport.id : 0,
+                    arrivalAirportId: destinationAirport ? destinationAirport.id : 0, 
                     departureDate: bookingValues.departureDate,
                     returnDate: bookingValues.dateOfReturn,
                 };

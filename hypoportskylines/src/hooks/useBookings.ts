@@ -2,6 +2,8 @@ import { useState, useEffect, useCallback } from "react";
 
 import { getAllBookings, createBooking, deleteBooking } from "../services/bookingService";
 
+import { BookingModel } from "../utils/types";
+
 type BookingItem = {
     id: number;
     firstName: string;
@@ -51,7 +53,7 @@ export const useBookings = () => {
         return () => window.removeEventListener("scroll", handleScroll);
     }, [handleScroll]);
 
-    const addBooking = async (bookingModel: BookingItem) => {
+    const addBooking = async (bookingModel: BookingModel) => {
         try {
             const newBooking = await createBooking(bookingModel);
             setBookings(prevState => ({

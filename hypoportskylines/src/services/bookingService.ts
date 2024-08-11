@@ -1,4 +1,4 @@
-import { BookingsResponse, BookingData } from '../utils/types';
+import { BookingsResponse, BookingModel } from '../utils/types';
 
 const BASE_URL = 'https://interview.fio.de/core-frontend/api';
 const AUTH_TOKEN = 'dcSPTXR7IQYtn2oMCfIAxvwNpOzGyU';
@@ -18,7 +18,7 @@ export const getAllBookings = async (pageIndex: number): Promise<BookingsRespons
     return result;
 };
 
-export const createBooking = async (bookingData: BookingData) => {
+export const createBooking = async (bookingData: BookingModel) => {
     const response = await fetch(`${BASE_URL}/bookings/create?authToken=${AUTH_TOKEN}`, {
         method: 'POST',
         headers: {

@@ -7,13 +7,13 @@ import { BookingsTable } from "./BookingsTable/BookingsTable";
 import { useBookings } from "../../hooks/useBookings";
 import { useAirports } from "../../hooks/useAirports";
 
-import { BookingItem } from "../../utils/types";
+import { BookingModel } from "../../utils/types";
 
 export const Bookings : React.FC = () => {
     const airports = useAirports();
     const { bookings, addBooking, removeBooking } = useBookings();
 
-    const handleBookingSubmit = async (bookingModel: BookingItem) => {
+    const handleBookingSubmit = async (bookingModel: BookingModel) => {
         try {
             await addBooking(bookingModel);
         } catch (error) {

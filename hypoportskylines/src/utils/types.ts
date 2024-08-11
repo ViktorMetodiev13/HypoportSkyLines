@@ -13,7 +13,7 @@ export type BookingsResponse = {
     totalCount: number;
 };
 
-export type BookingData = {
+export type BookingModel = {
     firstName: string;
     lastName: string;
     departureAirportId: number;
@@ -21,6 +21,14 @@ export type BookingData = {
     departureDate: string;
     returnDate: string;
 };
+
+export type BookingFormValues = {
+    guest: string;
+    departureAirport: string;
+    destinationAirport: string;
+    departureDate: string;
+    dateOfReturn: string;
+}
 
 export type AirportItem = {
     id: number,
