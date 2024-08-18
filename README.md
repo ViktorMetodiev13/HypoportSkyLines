@@ -8,6 +8,7 @@ SofiaSkyLines is a simple flight booking app that allows users to create, view, 
 - **View All Bookings:** All bookings are displayed in a table below the form.
 - **Delete Booking:** Users can delete any booking from the table.
 - **Simple Design:** The app features a clean and minimalistic design for easy use.
+- **Infinite Scrolling:** Seamlessly load more bookings as you scroll through the table, offering a smooth and uninterrupted browsing experience.
 
 ## Tech Stack
 
